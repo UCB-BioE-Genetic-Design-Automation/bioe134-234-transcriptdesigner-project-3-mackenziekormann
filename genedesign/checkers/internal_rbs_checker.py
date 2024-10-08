@@ -1,7 +1,7 @@
 import re 
-from models.transcript import Transcript
-from models.rbs_option import RBSOption
-from models.operon import Operon
+from genedesign.models.transcript import Transcript
+from genedesign.models.rbs_option import RBSOption
+from genedesign.models.operon import Operon
 
 class InternalRBSChecker:
     """
@@ -25,6 +25,13 @@ class InternalRBSChecker:
         sequence and a start codon.
         """
 
+        self.rbs_pattern = None
+
+    def initiate(self) -> None:
+        """
+        Defines the regex pattern used to check the input sequence.
+        """
+        
         self.rbs_pattern = re.compile(r"AUUAUU[AUCG]{7,9}AUG")
 
     def run(self, seq):

@@ -1,7 +1,7 @@
 import re
-from models.transcript import Transcript
-from models.rbs_option import RBSOption
-from models.operon import Operon
+from genedesign.models.transcript import Transcript
+from genedesign.models.rbs_option import RBSOption
+from genedesign.models.operon import Operon
 
 class RNaseEChecker:
     """
