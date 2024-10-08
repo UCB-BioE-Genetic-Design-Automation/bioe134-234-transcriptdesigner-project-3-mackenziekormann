@@ -1,11 +1,11 @@
-from models.rbs_option import RBSOption
+from genedesign.models.rbs_option import RBSOption
 from Bio import SeqIO
 from collections import defaultdict
-from seq_utils.Translate import Translate
-from seq_utils.reverse_complement import reverse_complement
-from seq_utils.exclude_ignored import exclude_ignored
-from seq_utils.check_secondary_structure import check_secondary_structure
-from seq_utils.compare_peptides import compare_peptides
+from genedesign.seq_utils.Translate import Translate
+from genedesign.seq_utils.reverse_complement import reverse_complement
+from genedesign.seq_utils.exclude_ignored import exclude_ignored
+from genedesign.seq_utils.check_secondary_structure import check_secondary_structure
+from genedesign.seq_utils.compare_peptides import compare_peptides
 
 class RBSChooser:
     """
