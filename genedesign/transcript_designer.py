@@ -1,5 +1,8 @@
 from genedesign.rbs_chooser import RBSChooser
 from genedesign.models.transcript import Transcript
+from genedesign.checkers.hairpin_checker import hairpin_checker
+from genedesign.transcript_to_seq import transcript_to_seq
+from genedesign.checkers.codon_checker import CodonChecker
 
 class TranscriptDesigner:
     """
@@ -45,11 +48,21 @@ class TranscriptDesigner:
         # Build the CDS from the codons
         cds = ''.join(codons)
 
+        # Check CDS # TODO: MOVE THIS SOMEWHERE ELSE
+        # codon_checker = CodonChecker.initiate()
+        # codons_approved = codon_checker.run()[0]
+        # if codons_approved == False:
+        #     raise ValueError("Codons not optimized")
+
         # Choose an RBS
         selectedRBS = self.rbsChooser.run(cds, ignores)
 
-        # Return the Transcript object
-        return Transcript(selectedRBS, peptide, codons)
+        # Check Transcript
+        transcript = Transcript(selectedRBS, peptide, codons)
+        if hairpin_checker(transcript_to_seq(transcript))[0] == False:
+            raise ValueError("Hairpin(s) Found")
+        
+        return transcript
 
 if __name__ == "__main__":
     # Example usage of TranscriptDesigner

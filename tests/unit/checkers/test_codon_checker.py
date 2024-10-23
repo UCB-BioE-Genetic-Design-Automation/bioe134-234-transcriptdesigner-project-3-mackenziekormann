@@ -1,5 +1,5 @@
 import pytest
-from checkers.codon_checker import CodonChecker
+from genedesign.checkers.codon_checker import CodonChecker
 
 @pytest.fixture
 def codon_checker():

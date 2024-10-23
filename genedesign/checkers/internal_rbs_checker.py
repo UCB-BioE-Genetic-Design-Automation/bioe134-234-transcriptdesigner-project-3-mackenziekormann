@@ -49,8 +49,6 @@ class InternalRBSChecker:
             As defined in the class definition. 
         """
 
-        seq.replace('T', 'U')
-
         matches = list(self.rbs_pattern.finditer(seq))
 
         positions = [match.start() for match in matches]
@@ -62,7 +60,7 @@ class InternalRBSChecker:
         else:
             internal_rbs_present = True
 
-        return internal_rbs_present, num_sites, positions
+        return internal_rbs_present, num_sites, positions, matches
     
 if __name__ == "__main__":
     """
@@ -105,8 +103,9 @@ if __name__ == "__main__":
 
     operon_seq = operon.promoter + "".join([transcript.rbs.utr + transcript.rbs.cds for transcript in operon.transcripts]) + operon.terminator
 
-    internal_rbs, num_sites, positions = internal_rbs_checker.run(operon_seq)
+    internal_rbs, num_sites, positions, matches = internal_rbs_checker.run(operon_seq)
 
     print(f"No internal RBSes are present in the operon: {internal_rbs}")
     print(f"Number of sites in operon: {num_sites}")
     print(f"The operon sites are located at: {positions}")
+    print(f"Matching sequences within the operon: {matches}")

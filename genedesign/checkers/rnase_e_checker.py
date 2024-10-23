@@ -41,10 +41,9 @@ class RNaseEChecker:
                 - rnase_e_site_present (bool)
                 - num_sites(int)
                 - positions (List[int])
+                - matches (List[str])
             As defined in the class definition. 
         """
-
-        seq.replace('T', 'U')
 
         matches = list(self.pattern.finditer(seq))
 
@@ -57,7 +56,7 @@ class RNaseEChecker:
         else:
             rnase_e_site_present = True
 
-        return rnase_e_site_present, num_sites, positions
+        return rnase_e_site_present, num_sites, positions, matches
     
 if __name__ == "__main__":
     """
@@ -101,8 +100,9 @@ if __name__ == "__main__":
 
     operon_seq = operon.promoter + "".join([transcript.rbs.utr + transcript.rbs.cds for transcript in operon.transcripts]) + operon.terminator
 
-    site_in_operon, num_operon_sites, operon_site_pos = rnase_e_checker.run(operon_seq)
+    site_in_operon, num_operon_sites, operon_site_pos, operon_matches = rnase_e_checker.run(operon_seq)
 
     print(f"No RNase E cleavage sites are present in the operon: {site_in_operon}")
     print(f"Number of sites in operon: {num_operon_sites}")
     print(f"The operon sites are located at: {operon_site_pos}")
+    print(f"Matching sequences within the operon: {operon_matches}")
