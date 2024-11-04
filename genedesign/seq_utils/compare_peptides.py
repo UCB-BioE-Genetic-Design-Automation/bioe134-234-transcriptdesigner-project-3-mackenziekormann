@@ -1,4 +1,4 @@
-from seq_utils.calc_edit_distance import calculate_edit_distance
+from genedesign.seq_utils.calc_edit_distance import calculate_edit_distance
 
 def compare_peptides(self, rbs_option, cds):
         """

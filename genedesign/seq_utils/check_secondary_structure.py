@@ -1,4 +1,4 @@
-from seq_utils.hairpin_counter import hairpin_counter
+from genedesign.seq_utils.hairpin_counter import hairpin_counter
 
 def check_secondary_structure(self, rbs_option, cds):
         """

@@ -3,7 +3,7 @@ import traceback
 import csv
 import time
 from statistics import mean
-from genedesign.seq_utils.translate import Translate
+from genedesign.seq_utils.Translate import Translate
 from genedesign.transcript_designer import TranscriptDesigner
 from genedesign.checkers.forbidden_sequence_checker import ForbiddenSequenceChecker
 from genedesign.checkers.internal_promoter_checker import PromoterChecker
@@ -52,9 +52,13 @@ def benchmark_proteome(fasta_file):
     successful_results = []
     error_results = []
 
+    i = 0
     for gene, protein in proteome.items():
+        if i >= 100:
+            break
         try:
             print(f"Processing gene: {gene} with protein sequence: {protein[:30]}...")
+            i += 1
             ignores = set()
             transcript = designer.run(protein, ignores)
             successful_results.append({
