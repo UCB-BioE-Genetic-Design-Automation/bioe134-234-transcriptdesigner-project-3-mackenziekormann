@@ -54,7 +54,7 @@ def benchmark_proteome(fasta_file):
 
     i = 0
     for gene, protein in proteome.items():
-        if i >= 100:
+        if i >= 10:
             break
         try:
             print(f"Processing gene: {gene} with protein sequence: {protein[:30]}...")
